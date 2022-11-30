@@ -21,6 +21,23 @@ const navbarSpring = {
   duration: 1,
 };
 
+const logoVariants = {
+  initial: {
+    opacity: 0,
+    x: -100,
+    scale: 0,
+  },
+  animate: {
+    opacity: 1,
+    x: [0, 100, 0],
+    scale: 1,
+    transition: {
+      ...navbarSpring,
+      delay: 0.5,
+    },
+  },
+};
+
 function Navbar() {
   return (
     <motion.nav
@@ -30,7 +47,14 @@ function Navbar() {
       className="bg-navColor py-3 dark:bg-navDark text-white px-16  justify-between items-center flex flex-col md:flex-row"
     >
       <div className="logo">
-        <p className="font-semibold text-2xl tracking-wider">LiveCric</p>
+        <motion.p
+          variants={logoVariants}
+          initial="initial"
+          animate="animate"
+          className="font-semibold text-2xl tracking-wider"
+        >
+          LiveCric
+        </motion.p>
       </div>
       <ul className="flex my-1 py-1">{returnLinks()}</ul>
     </motion.nav>

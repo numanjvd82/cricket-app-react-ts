@@ -12,7 +12,7 @@ function Home() {
   const [matches, setMatches] = useState<Match[]>(allMatches);
 
   return (
-    <>
+    <div className="overflow-x-hidden">
       <Navbar />
       <Hero />
       <MusicSection />
@@ -20,7 +20,7 @@ function Home() {
       <ImageSection />
       <TwoColumnSection />
       <Footer />
-    </>
+    </div>
   );
 }
 

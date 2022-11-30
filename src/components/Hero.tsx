@@ -19,6 +19,7 @@ function Hero() {
         <motion.article
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -100 }}
           transition={{ duration: 1.5, delay: 0.2 }}
           className="text-center w-full md:w-1/2 z-10"
         >

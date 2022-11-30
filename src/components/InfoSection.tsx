@@ -1,9 +1,30 @@
 import macbook from '../assets/images/macbook.png';
+import { motion } from 'framer-motion';
 
 function InfoSection() {
+  const imgVariants = {
+    initial: {
+      opacity: 0,
+      x: 100,
+    },
+    animate: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        delay: 0.5,
+        duration: 1,
+      },
+    },
+  };
+
   return (
     <section className="md:mt-[500px] mx-4 md:flex md:flex-col justify-center items-center">
-      <article className="sm:w-[1000px]">
+      <motion.article
+        initial={{ opacity: 0, x: -100 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1, delay: 0.5 }}
+        className="sm:w-[1000px]"
+      >
         <h1 className=" mb-6 font-bold text-xl md:text-2xl">
           The movie and TV collection you always wished for. Granted.
         </h1>
@@ -21,10 +42,15 @@ function InfoSection() {
             Read More
           </button>
         </div>
-      </article>
-      <figure className="my-8 min-w-[300px]">
+      </motion.article>
+      <motion.figure
+        variants={imgVariants}
+        initial="initial"
+        whileInView="animate"
+        className="my-8 min-w-[300px]"
+      >
         <img src={macbook} alt="Macbook" />
-      </figure>
+      </motion.figure>
     </section>
   );
 }
