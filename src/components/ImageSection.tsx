@@ -1,6 +1,21 @@
+import { motion } from 'framer-motion';
+
 function ImageSection() {
+  const ImageSectionSpring = {
+    type: 'spring',
+    damping: 30,
+    stiffness: 200,
+    duration: 1,
+    delay: 0.3,
+  };
+
   return (
-    <section className="bg-promotion-img h-[800px] relative my-6 bg-cover bg-center bg-no-repeat text-white object-cover before:w-full before:h-full before:absolute before:bg-black/50 before:top-0 before:left-0 before:z-0">
+    <motion.section
+      initial={{ width: '30%', opacity: 0 }}
+      whileInView={{ width: '100%', opacity: 1 }}
+      transition={ImageSectionSpring}
+      className="my-20  bg-promotion-img h-[90vh] relative bg-cover bg-center bg-no-repeat text-white object-cover before:w-full before:h-full before:absolute before:bg-black/50 before:top-0 before:left-0 before:z-0"
+    >
       <section className="flex flex-col justify-center items-center h-full md:w-1/2 mx-auto">
         <article className="z-10 text-center">
           <h1 className="text-2xl md:text-3xl font-semibold mb-4">
@@ -17,7 +32,7 @@ function ImageSection() {
           </p>
         </article>
       </section>
-    </section>
+    </motion.section>
   );
 }
 
