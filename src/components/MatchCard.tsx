@@ -1,9 +1,30 @@
 import { CgMediaLive } from 'react-icons/cg';
 import { Match } from '../constants';
+import { motion } from 'framer-motion';
 
 function MatchCard({ match }: { match: Match }) {
+  const matchVariant = {
+    hidden: {
+      opacity: 0,
+      y: 50,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: 'spring',
+        delay: 0.2,
+      },
+    },
+  };
+
   return (
-    <section className="bg-gray-300 w-[500px] p-2 rounded-lg shadow-lg my-2">
+    <motion.section
+      variants={matchVariant}
+      initial="hidden"
+      animate="visible"
+      className="bg-gray-300 w-[500px] p-2 rounded-lg shadow-lg my-2"
+    >
       <h4 className="capitalize font-semibold border-b border-b-white">
         Result
       </h4>
@@ -25,7 +46,7 @@ function MatchCard({ match }: { match: Match }) {
         </article>
         <p className="font-semibold">364/5 (50.0 ov)</p>
       </article>
-    </section>
+    </motion.section>
   );
 }
 
