@@ -1,18 +1,5 @@
 import { motion } from 'framer-motion';
-import linksData from './Links';
-
-function returnLinks() {
-  return linksData.map((link) => {
-    return (
-      <li
-        className="mx-3 text-sm cursor-pointer hover:border-b-2 transition-all font-semibold first:ml-0 last:mr-0"
-        key={link.id}
-      >
-        <a href={link.path}>{link.name}</a>
-      </li>
-    );
-  });
-}
+import { Link, Outlet } from 'react-router-dom';
 
 const navbarSpring = {
   type: 'spring',
@@ -40,24 +27,31 @@ const logoVariants = {
 
 function Navbar() {
   return (
-    <motion.nav
-      initial={{ width: '30%', opacity: 0 }}
-      animate={{ width: '100%', opacity: 1 }}
-      transition={navbarSpring}
-      className="bg-navColor py-3 dark:bg-navDark text-white px-16  justify-between items-center flex flex-col md:flex-row"
-    >
-      <div className="logo">
-        <motion.p
-          variants={logoVariants}
-          initial="initial"
-          animate="animate"
-          className="font-semibold text-2xl tracking-wider"
-        >
-          LiveCric
-        </motion.p>
-      </div>
-      <ul className="flex my-1 py-1">{returnLinks()}</ul>
-    </motion.nav>
+    <>
+      <motion.nav
+        initial={{ width: '30%', opacity: 0 }}
+        animate={{ width: '100%', opacity: 1 }}
+        transition={navbarSpring}
+        className="bg-navColor py-3 dark:bg-navDark text-white px-16  justify-between items-center flex flex-col md:flex-row"
+      >
+        <div className="logo">
+          <motion.p
+            variants={logoVariants}
+            initial="initial"
+            animate="animate"
+            className="font-semibold text-2xl tracking-wider cursor-pointer"
+          >
+            LiveCric
+          </motion.p>
+        </div>
+        <ul className="flex my-1 py-1">
+          <li className="mx-3 text-sm cursor-pointer hover:border-b-2 transition-all font-semibold first:ml-0 last:mr-0">
+            <Link to="/matches">Live Matches</Link>
+          </li>
+        </ul>
+      </motion.nav>
+      <Outlet />
+    </>
   );
 }
 

@@ -20,6 +20,7 @@ export type Match = {
   manOfTheMatch: string;
   result: string;
   status: statusType;
+  imageUrl?: string;
 };
 
 export const allMatches: Match[] = [

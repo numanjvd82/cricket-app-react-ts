@@ -1,16 +1,24 @@
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
+import Navbar from './components/Navbar';
+import { AuthContextProvider } from './context/authContext';
 import Home from './pages/Home';
-import Login from './pages/Login';
 import MatchPage from './pages/MatchPage';
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/match/:id" element={<MatchPage />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          element={
+            <AuthContextProvider>
+              <Navbar />
+            </AuthContextProvider>
+          }
+        >
+          <Route path="/" element={<Home />} />
+          <Route path="/matches" element={<MatchPage />} />
+        </Route>
       </Routes>
     </>
   );
