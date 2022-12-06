@@ -8,7 +8,7 @@ function MatchPage() {
   console.log(matches);
 
   return (
-    <section className="flex flex-col items-center justify-center mt-8">
+    <section className="flex flex-col items-center justify-center my-8">
       {matches.map((match) => (
         <MatchCard key={match.id} match={match} />
       ))}

@@ -13,6 +13,8 @@ function MatchCard({ match }: { match: Match }) {
       y: 0,
       transition: {
         type: 'spring',
+        stiffness: 200,
+        damping: 50,
         delay: 0.2,
       },
     },
@@ -28,24 +30,50 @@ function MatchCard({ match }: { match: Match }) {
       <h4 className="capitalize font-semibold border-b border-b-white">
         Result
       </h4>
-      <p className="text-center font-semibold">
+      <p className="text-center font-semibold text-lg">
         {match.team1} VS {match.team2}
       </p>
       <article className="flex justify-between">
         <h4 className="capitalize font-semibold">Toss</h4>
-        <p>England won the toss and elected to bat</p>
+        <p>
+          {match.tossWinner} won the toss and elected to {match.tossDecision}
+        </p>
       </article>
-      <article className="flex justify-between my-2">
-        <h2 className="font-semibold text-lg">England</h2>
-        <p className="font-semibold">364/5 (50.0 ov)</p>
-      </article>
-      <article className="flex justify-between my-2">
+      <article
+        className={`flex justify-between my-2 ${
+          match.team1Overs === 50 ? 'opacity-40' : ''
+        }`}
+      >
         <article className="flex items-center justify-center">
-          <h2 className="font-semibold text-lg">Australia</h2>
-          <CgMediaLive color="red" className="mx-2" />
+          <h2 className="font-semibold text-lg">{match.team1}</h2>
+          {match.team1Overs === 50 ? null : (
+            <CgMediaLive color="red" className="mx-2" />
+          )}
         </article>
-        <p className="font-semibold">364/5 (50.0 ov)</p>
+        <p className="font-semibold">
+          {match.team1Runs}/{match.team1Wickets} ({match.team1Overs} overs /{' '}
+          {match.team1Overs * 6} balls)
+        </p>
       </article>
+      <article
+        className={`flex justify-between my-2 ${
+          match.team2Overs === 50 ? 'opacity-40' : ''
+        }`}
+      >
+        <article className="flex items-center justify-center">
+          <h2 className="font-semibold text-lg">{match.team2}</h2>
+          {match.team2Overs === 50 ? null : (
+            <CgMediaLive color="red" className="mx-2" />
+          )}
+        </article>
+        <p className="font-semibold">
+          {match.team2Runs}/{match.team2Wickets} ({match.team2Overs} overs /{' '}
+          {match.team2Overs * 6} balls)
+        </p>
+      </article>
+      <h4 className="capitalize font-semibold border-t border-t-white">
+        Status: {match.status}
+      </h4>
     </motion.section>
   );
 }
