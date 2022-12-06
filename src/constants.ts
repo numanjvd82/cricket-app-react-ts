@@ -15,8 +15,10 @@ export type Match = {
   winner: string;
   team1Wickets: number;
   team1Runs: number;
+  team1Overs: number;
   team2Wickets: number;
   team2Runs: number;
+  team2Overs: number;
   manOfTheMatch: string;
   result: string;
   status: statusType;
@@ -39,8 +41,10 @@ export const allMatches: Match[] = [
     winner: 'Australia',
     team1Wickets: 10,
     team1Runs: 150,
+    team1Overs: 50,
     team2Wickets: 9,
     team2Runs: 151,
+    team2Overs: 30,
     manOfTheMatch: 'Steve Smith',
     result: 'Australia won by 1 wickets',
     status: 'completed',
@@ -60,8 +64,10 @@ export const allMatches: Match[] = [
     winner: 'New Zealand',
     team1Wickets: 10,
     team1Runs: 220,
+    team1Overs: 50,
     team2Wickets: 5,
     team2Runs: 221,
+    team2Overs: 30,
     manOfTheMatch: 'Kane Williamson',
     result: 'New Zealand won by 5 wickets',
     status: 'completed',
@@ -81,8 +87,10 @@ export const allMatches: Match[] = [
     winner: 'Pakistan',
     team1Wickets: 10,
     team1Runs: 220,
+    team1Overs: 50,
     team2Wickets: 5,
     team2Runs: 221,
+    team2Overs: 30,
     manOfTheMatch: 'Mohammad Amir',
     result: 'Pakistan won by 5 wickets',
     status: 'completed',
@@ -102,8 +110,10 @@ export const allMatches: Match[] = [
     winner: 'Australia',
     team1Wickets: 10,
     team1Runs: 178,
+    team1Overs: 50,
     team2Wickets: 2,
     team2Runs: 45,
+    team2Overs: 30,
     manOfTheMatch: '',
     result: '',
     status: 'in-progress',
