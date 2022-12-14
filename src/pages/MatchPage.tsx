@@ -4,12 +4,47 @@ import { allMatches, Match } from '../constants';
 
 function MatchPage() {
   const [matches, setMatches] = useState<Match[]>(allMatches);
+  const wicketsUpdateInterval = 30000;
+  const runsUpdateInterval = 15000;
+  const oversUpdateInterval = 15000;
 
   const getRandomNumber = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
-  const updateScore = () => {
+  const updateWickets = () => {
+    const newMatches = matches.map((match) => {
+      if (match.status === 'completed') {
+        return match;
+      }
+
+      if (match.team1Overs === 50 && match.team2Overs === 50) {
+        return match;
+      }
+
+      if (match.team1Overs !== 50) {
+        if (match.team1Wickets === 10) {
+          match.status = 'completed';
+        } else {
+          match.team1Wickets += 1;
+        }
+      }
+
+      if (match.team2Overs !== 50) {
+        if (match.team2Wickets === 10) {
+          match.status = 'completed';
+        } else {
+          match.team2Wickets += 1;
+        }
+      }
+
+      return match;
+    });
+
+    setMatches(newMatches);
+  };
+
+  const updateRuns = () => {
     const newMatches = matches.map((match) => {
       if (match.status === 'completed') {
         return match;
@@ -28,32 +63,36 @@ function MatchPage() {
       }
 
       if (match.team2Runs > match.team1Runs) {
-        match.team2Overs = 50;
         match.status = 'completed';
       }
 
       return match;
     });
 
-    const timer = setTimeout(() => {
-      setMatches(newMatches);
-      console.log('updated');
-    }, 3000);
-
-    if (newMatches.every((match) => match.status === 'completed')) {
-      clearTimeout(timer);
-    }
-
-    return timer;
+    setMatches(newMatches);
   };
 
   useEffect(() => {
-    updateScore();
+    const interval = setInterval(() => {
+      updateRuns();
+      console.log('runs updated');
+    }, runsUpdateInterval);
 
     return () => {
-      clearTimeout(updateScore());
+      clearInterval(interval);
     };
-  }, [matches]);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      updateWickets();
+      console.log('wickets updated');
+    }, wicketsUpdateInterval);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
     <section className="flex flex-col items-center justify-center my-8">
