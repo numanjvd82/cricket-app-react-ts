@@ -108,10 +108,11 @@ function MatchPage() {
         autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
-
+        pauseOnFocusLoss: false,
         draggable: true,
         progress: undefined,
       });
+      toast.clearWaitingQueue();
     }, runsUpdateInterval);
 
     return () => {
@@ -128,10 +129,11 @@ function MatchPage() {
         autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
-
+        pauseOnFocusLoss: false,
         draggable: true,
         progress: undefined,
       });
+      toast.clearWaitingQueue();
     }, wicketsUpdateInterval);
 
     return () => {
@@ -148,10 +150,11 @@ function MatchPage() {
         autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
-
+        pauseOnFocusLoss: false,
         draggable: true,
         progress: undefined,
       });
+      toast.clearWaitingQueue();
     }, oversUpdateInterval);
 
     return () => {
@@ -161,7 +164,7 @@ function MatchPage() {
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer limit={6} />
       <section className="flex flex-col items-center justify-center my-8">
         {matches.map((match) => (
           <MatchCard key={match.id} match={match} />
