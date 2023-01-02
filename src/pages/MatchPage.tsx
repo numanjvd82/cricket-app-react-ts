@@ -15,22 +15,37 @@ function MatchPage() {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
+  function incrementOver(over: string) {
+    // Split the over into two parts: the whole number and the fraction
+    const parts = over.split('.');
+    const whole = parseInt(parts[0], 10);
+    const fraction = parseInt(parts[1], 10);
+
+    // If the fraction is 6, increment the whole number and set the fraction to 0
+    if (fraction === 6) {
+      return `${whole + 1}.0`;
+    } else {
+      // Otherwise, increment the fraction by 1
+      return `${whole}.${fraction + 1}`;
+    }
+  }
+
   const updateOvers = () => {
     const newMatches = matches.map((match) => {
       if (match.status === 'completed') {
         return match;
       }
 
-      if (match.team1Overs === 50 && match.team2Overs === 50) {
+      if (Number(match.team1Overs) === 50 && Number(match.team2Overs) === 50) {
         return match;
       }
 
-      if (match.team1Overs !== 50) {
-        match.team1Overs += 1;
+      if (Number(match.team1Overs) !== 50) {
+        match.team1Overs = incrementOver(match.team1Overs);
       }
 
-      if (match.team2Overs !== 50) {
-        match.team2Overs += 1;
+      if (Number(match.team2Overs) !== 50) {
+        match.team2Overs = incrementOver(match.team2Overs);
       }
 
       return match;
@@ -45,11 +60,11 @@ function MatchPage() {
         return match;
       }
 
-      if (match.team1Overs === 50 && match.team2Overs === 50) {
+      if (Number(match.team1Overs) === 50 && Number(match.team2Overs) === 50) {
         return match;
       }
 
-      if (match.team1Overs !== 50) {
+      if (Number(match.team1Overs) !== 50) {
         if (match.team1Wickets === 10) {
           match.status = 'completed';
         } else {
@@ -57,7 +72,7 @@ function MatchPage() {
         }
       }
 
-      if (match.team2Overs !== 50) {
+      if (Number(match.team1Overs) !== 50) {
         if (match.team2Wickets === 10) {
           match.status = 'completed';
         } else {
@@ -77,15 +92,15 @@ function MatchPage() {
         return match;
       }
 
-      if (match.team1Overs === 50 && match.team2Overs === 50) {
+      if (Number(match.team1Overs) === 50 && Number(match.team2Overs) === 50) {
         return match;
       }
 
-      if (match.team1Overs !== 50) {
+      if (Number(match.team1Overs) !== 50) {
         match.team1Runs += getRandomNumber(0, 6);
       }
 
-      if (match.team2Overs !== 50) {
+      if (Number(match.team2Overs)) {
         match.team2Runs += getRandomNumber(0, 6);
       }
 
