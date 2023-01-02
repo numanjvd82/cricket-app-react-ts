@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import MatchCard from '../components/MatchCard';
 import { allMatches, Match } from '../constants';
+import 'react-toastify/dist/ReactToastify.css';
 
 function MatchPage() {
   const [matches, setMatches] = useState<Match[]>(allMatches);
@@ -100,6 +103,15 @@ function MatchPage() {
     const interval = setInterval(() => {
       updateRuns();
       console.log('runs updated');
+      toast.info('Runs updated', {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }, runsUpdateInterval);
 
     return () => {
@@ -111,6 +123,15 @@ function MatchPage() {
     const interval = setInterval(() => {
       updateWickets();
       console.log('wickets updated');
+      toast.warn('Wicket Fell Down', {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }, wicketsUpdateInterval);
 
     return () => {
@@ -122,6 +143,15 @@ function MatchPage() {
     const interval = setInterval(() => {
       updateOvers();
       console.log('overs updated');
+      toast.success('Over Completed', {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }, oversUpdateInterval);
 
     return () => {
@@ -130,11 +160,14 @@ function MatchPage() {
   }, []);
 
   return (
-    <section className="flex flex-col items-center justify-center my-8">
-      {matches.map((match) => (
-        <MatchCard key={match.id} match={match} />
-      ))}
-    </section>
+    <>
+      <ToastContainer />
+      <section className="flex flex-col items-center justify-center my-8">
+        {matches.map((match) => (
+          <MatchCard key={match.id} match={match} />
+        ))}
+      </section>
+    </>
   );
 }
 
