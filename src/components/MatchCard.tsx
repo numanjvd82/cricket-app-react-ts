@@ -20,6 +20,19 @@ function MatchCard({ match }: { match: Match }) {
     },
   };
 
+  const renderLiveSign = () => {
+    if (match.status === 'completed') {
+      return null;
+    }
+    if (match.team1Overs !== 50 || match.team1Wickets !== 10) {
+      return <CgMediaLive color="red" className="mx-2" />;
+    }
+
+    if (match.team2Overs !== 50 || match.team2Wickets !== 10) {
+      return <CgMediaLive color="red" className="mx-2" />;
+    }
+  };
+
   return (
     <motion.section
       variants={matchVariant}
@@ -41,14 +54,16 @@ function MatchCard({ match }: { match: Match }) {
       </article>
       <article
         className={`flex justify-between my-2 ${
-          match.team1Overs === 50 ? 'opacity-40' : ''
+          match.team1Overs === 50 ||
+          match.team1Wickets === 10 ||
+          match.status === 'completed'
+            ? 'opacity-40'
+            : ''
         }`}
       >
         <article className="flex items-center justify-center">
           <h2 className="font-semibold text-lg">{match.team1}</h2>
-          {match.team1Overs === 50 ? null : (
-            <CgMediaLive color="red" className="mx-2" />
-          )}
+          {renderLiveSign()}
         </article>
         <p className="font-semibold">
           {match.team1Runs}/{match.team1Wickets} ({match.team1Overs} overs /{' '}
@@ -57,14 +72,17 @@ function MatchCard({ match }: { match: Match }) {
       </article>
       <article
         className={`flex justify-between my-2 ${
-          match.team2Overs === 50 ? 'opacity-40' : ''
+          match.team2Overs === 50 ||
+          match.team2Wickets === 10 ||
+          match.status === 'completed' ||
+          match.team2Runs > match.team1Runs
+            ? 'opacity-40'
+            : ''
         }`}
       >
         <article className="flex items-center justify-center">
           <h2 className="font-semibold text-lg">{match.team2}</h2>
-          {match.team2Overs === 50 ? null : (
-            <CgMediaLive color="red" className="mx-2" />
-          )}
+          {renderLiveSign()}
         </article>
         <p className="font-semibold">
           {match.team2Runs}/{match.team2Wickets} ({match.team2Overs} overs /{' '}
