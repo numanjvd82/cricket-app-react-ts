@@ -12,6 +12,30 @@ function MatchPage() {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
+  const updateOvers = () => {
+    const newMatches = matches.map((match) => {
+      if (match.status === 'completed') {
+        return match;
+      }
+
+      if (match.team1Overs === 50 && match.team2Overs === 50) {
+        return match;
+      }
+
+      if (match.team1Overs !== 50) {
+        match.team1Overs += 1;
+      }
+
+      if (match.team2Overs !== 50) {
+        match.team2Overs += 1;
+      }
+
+      return match;
+    });
+
+    setMatches(newMatches);
+  };
+
   const updateWickets = () => {
     const newMatches = matches.map((match) => {
       if (match.status === 'completed') {
@@ -88,6 +112,17 @@ function MatchPage() {
       updateWickets();
       console.log('wickets updated');
     }, wicketsUpdateInterval);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      updateOvers();
+      console.log('overs updated');
+    }, oversUpdateInterval);
 
     return () => {
       clearInterval(interval);
