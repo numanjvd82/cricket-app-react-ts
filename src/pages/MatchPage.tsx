@@ -4,31 +4,18 @@ import { ToastContainer } from 'react-toastify';
 import MatchCard from '../components/MatchCard';
 import { allMatches, Match } from '../constants';
 import 'react-toastify/dist/ReactToastify.css';
+import { incrementOver } from '../utils';
 
 function MatchPage() {
   const [matches, setMatches] = useState<Match[]>(allMatches);
   const wicketsUpdateInterval = 30000;
   const runsUpdateInterval = 15000;
   const oversUpdateInterval = 15000;
+  let runMadeOnLastBall: number;
 
   const getRandomNumber = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
-
-  function incrementOver(over: string) {
-    // Split the over into two parts: the whole number and the fraction
-    const parts = over.split('.');
-    const whole = parseInt(parts[0], 10);
-    const fraction = parseInt(parts[1], 10);
-
-    // If the fraction is 6, increment the whole number and set the fraction to 0
-    if (fraction === 6) {
-      return `${whole + 1}.0`;
-    } else {
-      // Otherwise, increment the fraction by 1
-      return `${whole}.${fraction + 1}`;
-    }
-  }
 
   const updateOvers = () => {
     const newMatches = matches.map((match) => {
@@ -98,10 +85,12 @@ function MatchPage() {
 
       if (Number(match.team1Overs) !== 50) {
         match.team1Runs += getRandomNumber(0, 6);
+        runMadeOnLastBall = getRandomNumber(0, 6);
       }
 
       if (Number(match.team2Overs)) {
         match.team2Runs += getRandomNumber(0, 6);
+        runMadeOnLastBall = getRandomNumber(0, 6);
       }
 
       if (match.team2Runs > match.team1Runs) {
@@ -118,7 +107,7 @@ function MatchPage() {
     const interval = setInterval(() => {
       updateRuns();
       console.log('runs updated');
-      toast.info('Runs updated', {
+      toast.info(`${runMadeOnLastBall} Made on Last Ball`, {
         position: 'top-right',
         autoClose: 2000,
         hideProgressBar: false,
