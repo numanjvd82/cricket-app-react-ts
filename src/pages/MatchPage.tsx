@@ -149,16 +149,6 @@ function MatchPage() {
     const interval = setInterval(() => {
       updateOvers();
       console.log('overs updated');
-      toast.success('Over Completed', {
-        position: 'top-right',
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnFocusLoss: false,
-        draggable: true,
-        progress: undefined,
-      });
-      toast.clearWaitingQueue();
     }, oversUpdateInterval);
 
     return () => {
