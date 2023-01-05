@@ -4,7 +4,6 @@ import InfoSection from '../components/InfoSection';
 import MusicSection from '../components/MusicSection';
 import TwoColumnSection from '../components/TwoColumnSection';
 import Footer from '../components/Footer';
-import { AuthContextProvider } from '../context/authContext';
 
 function Home() {
   return (
