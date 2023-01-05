@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom';
+import DetailCard from '../components/DetailCard';
 import { Match } from '../constants';
 
 function MatchDetails() {
@@ -6,7 +7,7 @@ function MatchDetails() {
   const match = location.state.match as Match;
   return (
     <>
-      <h1>Match Details</h1>
+      <DetailCard match={match} />
     </>
   );
 }
