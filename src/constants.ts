@@ -22,7 +22,8 @@ export type Match = {
   manOfTheMatch: string;
   result: string;
   status: statusType;
-  imageUrl?: string;
+  team1Image?: string;
+  team2Image?: string;
 };
 
 export const allMatches: Match[] = [
@@ -48,6 +49,10 @@ export const allMatches: Match[] = [
     manOfTheMatch: 'Steve Smith',
     result: 'Australia won by 1 wickets',
     status: 'completed',
+    team1Image:
+      'https://i.bleacherreport.net/images/team_logos/328x328/england_cricket.png?canvas=492,328',
+    team2Image:
+      'https://i.bleacherreport.net/images/team_logos/328x328/australia_cricket.png?canvas=492,328',
   },
   {
     id: 2,
@@ -71,6 +76,10 @@ export const allMatches: Match[] = [
     manOfTheMatch: 'Kane Williamson',
     result: 'New Zealand won by 5 wickets',
     status: 'completed',
+    team1Image:
+      'https://i.bleacherreport.net/images/team_logos/328x328/india_cricket.png?canvas=492,328',
+    team2Image:
+      'https://i.bleacherreport.net/images/team_logos/328x328/new_zealand_cricket.png?canvas=492,328',
   },
   {
     id: 3,
@@ -94,6 +103,10 @@ export const allMatches: Match[] = [
     manOfTheMatch: 'Mohammad Amir',
     result: 'Pakistan won by 5 wickets',
     status: 'completed',
+    team1Image:
+      'https://i.bleacherreport.net/images/team_logos/328x328/india_cricket.png?canvas=492,328',
+    team2Image:
+      'https://i.bleacherreport.net/images/team_logos/328x328/pakistan_cricket.png?canvas=492,328',
   },
   {
     id: 4,
@@ -117,5 +130,9 @@ export const allMatches: Match[] = [
     manOfTheMatch: '',
     result: '',
     status: 'in-progress',
+    team1Image:
+      'https://i.bleacherreport.net/images/team_logos/328x328/south_africa_cricket.png?canvas=492,328',
+    team2Image:
+      'https://i.bleacherreport.net/images/team_logos/328x328/australia_cricket.png?canvas=492,328',
   },
 ];
