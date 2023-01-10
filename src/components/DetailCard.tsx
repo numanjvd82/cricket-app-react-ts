@@ -22,7 +22,7 @@ function DetailCard({ match }: { match: Match }) {
         </div>
       </div>
       <div className="mb-4">
-        <div className="text-gray-600">{match.venue}</div>
+        <div className="text-gray-600">Location: {match.venue}</div>
         <div className="text-gray-600 font-semibold">
           {match.date} {match.time}
         </div>
@@ -33,7 +33,7 @@ function DetailCard({ match }: { match: Match }) {
         <div className="text-gray-600">Toss Decision: {match.tossDecision}</div>
       </div>
       <div className="text-gray-600 font-bold uppercase">
-        Man of the match: {match.manOfTheMatch}
+        Man of the match: {match.manOfTheMatch ? match.manOfTheMatch : '-'}
       </div>
     </div>
   );
